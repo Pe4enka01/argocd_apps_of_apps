@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: backtend
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Pe4enka01/argocd_apps_of_apps
+    targetRevision: HEAD
+    path: backtend
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: backtend
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
